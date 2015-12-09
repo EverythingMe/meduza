@@ -1,0 +1,10 @@
+*~
+*.a
+*.6
+*.out
+.idea
+*.iml
+meduzad/meduzad
+*.test
+*.log
+

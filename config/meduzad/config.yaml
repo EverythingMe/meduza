@@ -1,0 +1,49 @@
+server:
+    # RESP listen port
+    listen: ":9977"
+    
+    # Control REST listen port
+    ctl_listen: ":9966"
+    
+    # minimal logging level
+    logging_level: INFO
+
+scribe:
+    enabled: false
+    address: 127.0.0.1:1463
+    category: meduza
+
+    # internal buffer size before flushing to scribe
+    buffer_size: 50
+    
+redis:
+
+    # tcp/unix - we should try performance on unix
+    net: tcp
+    
+    # redis server address
+    addr: 127.0.0.1:6375
+    
+    # timeout in milliseconds
+    timeout_ms: 1000
+    master: true
+    repair_enabled: true
+    repair_freq_ms: 50
+
+# The redis instance we connnect to in order to read and publish schemas
+schema_redis:
+
+    # tcp/unix - we should try performance on unix
+    net: tcp
+    
+    # redis server address
+    addr: 127.0.0.1:6375
+    
+    # timeout in milliseconds
+    timeout_ms: 1000
+
+statsd: 
+    enabled: true
+    address: 127.0.0.1:8125
+    sample_rate: 0.05
+    prefix: meduza

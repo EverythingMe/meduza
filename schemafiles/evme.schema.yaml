@@ -1,0 +1,127 @@
+schema: evme
+tables:
+    MarketInfo:
+        adminOptions:
+            listColumns: 
+                - packageId
+                - name
+                - locale
+        table:
+            marketInfo
+        engines: 
+            - redis
+            
+        primary:
+            type: compound
+            columns: [packageId, locale]            
+       
+        columns:    
+            packageId:
+                type: Text
+
+            locale:
+                type: Text
+                adminOptions:
+                    priority: 6
+
+            name:
+                type: Text
+
+            score:
+                type: Float
+                default: 0
+            
+                adminOptions:
+                    priority: 1
+
+            rank:
+                type: Float
+                default: 0
+
+            installs:
+                clientName: installseLowerBounds
+                type: Int
+
+            description:
+                type: Text
+                options:
+                    max_len: 10000
+            price:
+                type: Float
+                
+            currency:
+                type: Text
+                options:
+                    choices: ['usd', 'nis']
+                    
+            screens:
+                comment: "Ids of the screenshot urls copied to s3"
+                clientName: screenshots
+                type: Set
+                
+            mpp:
+                type: Map
+            
+            lmtime:
+                type: Timestamp
+                default: $now
+                
+                
+                
+    Users:
+        engines: 
+            - redis
+        adminOptions:
+            listColumns: [name, email, lastVisit]
+        options:
+            lru_size: 10000
+            fallback_engine: mysql
+            fallback_table: users
+        columns:
+        
+            name: 
+                comment: "The name of this user"
+                type: Text
+                options: 
+                    not_null: true
+
+                    
+            email:
+                type: Text
+                options:
+                    not_null: true
+                    max_len: 255
+                    must_match: \b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b
+            time:                    
+                type: Timestamp
+            authToken:
+                type: Text
+                
+            lastVisit:
+                type: Timestamp
+                default: current_timestamp
+                
+            # Lat Lon - for geo indexing
+            lat:
+                type: Float
+            lon:
+                type: Float
+                
+                
+        indexes:
+            #-   type: compound
+            #    columns: [name]
+            -   type: compound
+                columns: [name]
+            #-   type: simple
+            #    columns: [time]
+            #-   type: simple
+            #    columns: [email]				
+            #    
+            #-   type: geo
+            #    columns: [lat,lon]
+                
+
+
+        
+#wat

@@ -1,0 +1,119 @@
+# Schema file for evme
+schema: evme
+tables:
+    MarketInfo:
+        comment:
+            Represents localized info from the market for native apps	
+        class:
+            MarketInfo
+        engines: 
+            - redis
+            
+        primary:
+            type: random
+            columns: [packageId, locale]            
+       
+        columns:    
+            packageId:
+                type: Text
+                options: 
+                     required: true
+                     max_len: 100
+
+            locale:
+                type: Text
+
+            name:
+                type: Text
+
+            score:
+                type: Float
+                default: 0
+
+            rank:
+                type: Float
+                default: 0
+
+            installs:
+                clientName: installseLowerBounds
+                type: Int
+
+            description:
+                type: Text
+                options:
+                    max_len: 10000
+            price:
+                type: Float
+                
+            currency:
+                type: Text
+                options:
+                    choices: ['usd', 'nis']
+                    
+            screens:
+                comment: "Ids of the screenshot urls copied to s3"
+                clientName: screenshots
+                type: List
+                options:
+                    subtype: Text
+            
+            lmtime:
+                clientName: lastModification
+                type: Timestamp
+                default: $now
+                
+                
+                
+    Users:
+        engines: 
+            - redis
+        columns:
+        
+            name: 
+                comment: "The name of this user"
+                type: Text
+                options: 
+                    not_null: true
+
+                    
+            email:
+                type: Text
+                options:
+                    not_null: true
+                    max_len: 255
+                    must_match: \b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b
+            time:
+                type: Timestamp
+            count:                    
+                type: Int
+                
+            authToken:
+                type: Text
+                
+            lastVisit:
+                type: Timestamp
+                default: $now
+                
+            # Lat Lon - for geo indexing
+            lat:
+                type: Float
+            lon:
+                type: Float
+                
+                
+        indexes:
+            #-   type: compound
+            #    columns: [name]
+            -   type: compound
+                columns: [name]
+            #-   type: simple
+            #    columns: [time]
+            #-   type: simple
+            #    columns: [email]				
+            #    
+            #-   type: geo
+            #    columns: [lat,lon]
+                
+
+
+        
