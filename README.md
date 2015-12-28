@@ -275,6 +275,8 @@ The command for generating models for a schema is:
 
 ## Using the Python API
 
+The Python library for meduza can be found at https://github.com/EverythingMe/meduza-py
+
 This is an example usage of the python API to create, get, update and delete users based on a generated model.
 
 #### First of all, let's assume our schema is as follows:
