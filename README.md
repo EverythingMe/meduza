@@ -2,7 +2,7 @@
 
 ## What is Meduza
 
-   Meduza is a cross-language, cross database, loose schema NoSQL data store, with an Object Mapper for easy 
+   Meduza is a cross-language, cross database, loose schema, non-relational NoSQL data store, with an Object Mapper for easy 
    querying and code integration.
 
    It has a server implemented in Go, and clients currently implemented in both Go and Python. 
@@ -26,6 +26,7 @@
 5. The schema is used by clients for mapping only
 6. Mapping is optional
 7. The server is aware of indexing metadata
+8. Models are non relational. You have either primary or secondary keys, and that's it.
     
 ---------------------
 
